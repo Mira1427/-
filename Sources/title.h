@@ -27,6 +27,8 @@ public:
 	void render(ID3D11DeviceContext* dc) override;
 	void ImGui() override;
 
+	void addButton();
+
 	std::unique_ptr<SkyMap> skyMap_;
 };
 

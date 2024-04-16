@@ -44,33 +44,9 @@ void Title::update(float elapsedTime) {
 		camera_->transform_->rotation_ = { 200.0f, -180.0f, 0.0f };
 	}
 
-	// --- ボタン用 ---
-	{
-		auto* buttonManager = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::buttonManager_);
-		{
-			buttonManager->addComponent<ButtonComponent>();
+		// --- ボタン用 ---
+		addButton();
 
-			buttonManager->name_ = u8"ボタン管理";
-		}
-
-		auto* startButton = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::titleStartButton_);
-		{
-			startButton->name_ = u8"スタートボタン";
-			startButton->parent_ = buttonManager;
-			startButton->eraser_ = &EraserManager::titleEraser_;
-		}
-
-		auto* endButton = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::titleEndButton_);
-		{
-			endButton->name_ = u8"終了ボタン";
-			endButton->parent_ = buttonManager;
-			endButton->eraser_ = &EraserManager::titleEraser_;
-		}
-	}
-
-	{
-		
-	}
 
 		skyMap_ = std::make_unique<SkyMap>(Graphics::instance().getDevice(), L"./Data/Images/SkyMap/envmap_miramar.dds");
 
@@ -121,4 +97,34 @@ void Title::render(ID3D11DeviceContext* dc) {
 
 void Title::ImGui() {
 
+}
+
+
+// --- ボタンの追加 ---
+void Title::addButton()
+{
+	// --- ボタン管理オブジェクト ---
+	auto* buttonManager = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::buttonManager_);
+	{
+		buttonManager->addComponent<ButtonComponent>();
+
+		buttonManager->name_ = u8"ボタン管理";
+		buttonManager->eraser_ = &EraserManager::titleEraser_;
+	}
+
+	// --- スタートボタン ---
+	auto* startButton = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::titleStartButton_);
+	{
+		startButton->name_ = u8"スタートボタン";
+		startButton->parent_ = buttonManager;
+		startButton->eraser_ = &EraserManager::titleEraser_;
+	}
+
+	// --- 終了ボタン ---
+	auto* endButton = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::titleEndButton_);
+	{
+		endButton->name_ = u8"終了ボタン";
+		endButton->parent_ = buttonManager;
+		endButton->eraser_ = &EraserManager::titleEraser_;
+	}
 }

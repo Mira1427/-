@@ -1,0 +1,11 @@
+Left 1 65
+Right 2 68
+Up 4 87
+Down 8 83
+Delete 128 46
+---keyAssignEnd--- -1 -1
+---PadAssignEnd--- -1 -1
+LMB 16 1
+RMB 32 2
+MMB 64 4
+---MouseAssignEnd--- -1 -1

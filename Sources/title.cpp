@@ -46,13 +46,10 @@ void Title::update(float elapsedTime) {
 
 		skyMap_ = std::make_unique<SkyMap>(Graphics::instance().getDevice(), L"./Data/Images/SkyMap/envmap_miramar.dds");
 
-
 		state_++;
 
 	case 1:
 
-
-		//‚©‚„‚‹‚†‚©
 		GameObjectManager::instance().update(elapsedTime);
 
 		GameObjectManager::instance().judgeCollision(elapsedTime);

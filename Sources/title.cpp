@@ -51,6 +51,8 @@ void Title::update(float elapsedTime) {
 
 	case 1:
 
+
+		//‚©‚„‚‹‚†‚©
 		GameObjectManager::instance().update(elapsedTime);
 
 		GameObjectManager::instance().judgeCollision(elapsedTime);

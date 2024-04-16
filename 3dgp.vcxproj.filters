@@ -271,6 +271,9 @@
     <ClCompile Include="Sources\SceneEraser.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\ButtonBehavior.cpp">
+      <Filter>Sources\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\framework.h">
@@ -447,9 +450,6 @@
     <ClInclude Include="Sources\PlayerBehavior.h">
       <Filter>Headers\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Component.h">
-      <Filter>Headers\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\EraserManager.h">
       <Filter>Headers\GameObject</Filter>
     </ClInclude>
@@ -458,6 +458,12 @@
     </ClInclude>
     <ClInclude Include="Sources\SceneEraser.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Component.h">
+      <Filter>Headers\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ButtonBehavior.h">
+      <Filter>Headers\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

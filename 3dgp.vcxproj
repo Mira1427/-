@@ -203,6 +203,7 @@
     <ClCompile Include="External\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Sources\BehaviorManager.cpp" />
     <ClCompile Include="Sources\BlockBehavior.cpp" />
+    <ClCompile Include="Sources\ButtonBehavior.cpp" />
     <ClCompile Include="Sources\CameraBehavior.cpp" />
     <ClCompile Include="Sources\Component.cpp" />
     <ClCompile Include="Sources\EraserManager.cpp" />
@@ -264,6 +265,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Sources\BehaviorManager.h" />
     <ClInclude Include="Sources\BlockBehavior.h" />
+    <ClInclude Include="Sources\ButtonBehavior.h" />
     <ClInclude Include="Sources\CameraBehavior.h" />
     <ClInclude Include="Sources\Component.h" />
     <ClInclude Include="Sources\EraserManager.h" />

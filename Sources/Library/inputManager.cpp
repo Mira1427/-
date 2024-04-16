@@ -11,6 +11,7 @@ std::list<InputAssign> keyAssign = {
 	{"Up", input::UP, DirectX::Keyboard::W},
 	{"Down", input::DOWN, DirectX::Keyboard::S},
 	{"Delete", input::DELETE_, DirectX::Keyboard::Delete},
+	{"Enter", input::ENTER, DirectX::Keyboard::Enter},
 	{"---keyAssignEnd---", -1, -1}
 };
 

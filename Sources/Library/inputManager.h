@@ -21,6 +21,7 @@ namespace input {
 	inline static constexpr uint64_t RMB	 = 32;
 	inline static constexpr uint64_t MMB	 = 64;
 	inline static constexpr uint64_t DELETE_ = 128;
+	inline static constexpr uint64_t ENTER	 = 256;
 
 
 	class GamePad {

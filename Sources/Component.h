@@ -58,3 +58,32 @@ public:
 
 	int life_;
 };
+
+
+// --- ボタンコンポーネント ---
+class ButtonComponent final : public Component
+{
+public:
+	ButtonComponent() :
+		index_()
+	{}
+
+
+	void draw(ID3D11DeviceContext* dc) override {};
+
+	void updateDebugGui(float elapsedTime) override
+	{
+		ImGui::Spacing();
+		ImGui::Separator();
+		if (ImGui::TreeNode("Button")) {
+			ImGui::Spacing();
+
+			ImGui::InputInt(u8"インデックス", &index_);
+
+			ImGui::TreePop();
+		}
+	}
+
+
+	int index_;
+};

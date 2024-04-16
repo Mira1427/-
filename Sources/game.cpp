@@ -32,6 +32,7 @@ void Game::update(float elapsedTime)
 	{
 	case 0:
 
+		//cube_ = std::make_shared<StaticMesh>(Graphics::instance().getDevice(), L"./Data/Models/ObjTest/test.obj", false);
 		cube_ = std::make_shared<StaticMesh>(Graphics::instance().getDevice(), L"./Data/Models/ObjTest/test.obj", false);
 
 		// --- カメラオブジェクト ---

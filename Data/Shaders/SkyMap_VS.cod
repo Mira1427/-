@@ -32,7 +32,7 @@ dcl_indexableTemp x1[4], 4
 //   o0.x <- <main return value>.position_.x; o0.y <- <main return value>.position_.y; o0.z <- <main return value>.position_.z; o0.w <- <main return value>.position_.w; 
 //   x0 <- positions; x1 <- texcoords
 //
-#line 7 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SkyMap_VS.hlsl"
+#line 7 "D:\2年次科目\チE"
 mov x0[0].xy, l(-1.000000,1.000000,0,0)
 mov x0[1].xy, l(1.000000,1.000000,0,0)
 mov x0[2].xy, l(-1.000000,-1.000000,0,0)

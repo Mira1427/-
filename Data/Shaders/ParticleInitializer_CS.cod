@@ -67,7 +67,7 @@ dcl_thread_group 16, 1, 1
 // Initial variable locations:
 //   vThreadID.x <- dtID.x; vThreadID.y <- dtID.y; vThreadID.z <- dtID.z
 //
-#line 9 "C:\Users\2230081\Desktop\-\HLSL\ParticleInitializer_CS.hlsl"
+#line 9 "D:\2年次科目\チE"
 mov r0.x, vThreadID.x  // r0.x <- id
 
 #line 13
@@ -78,36 +78,36 @@ nop
 utof r0.z, r0.x
 mul r0.z, r0.y, r0.z
 
-#line 23 "C:\Users\2230081\Desktop\-\HLSL\Common.hlsli"
+#line 23 "D:\2年次科目\チーム制作2年\第1回\-\HLSL\Common.hlsli"
 sincos r0.z, null, r0.z
 mul r0.z, r0.z, l(43758.546875)
 frc r0.z, r0.z  // r0.z <- <rand return value>
 
-#line 14 "C:\Users\2230081\Desktop\-\HLSL\ParticleInitializer_CS.hlsl"
+#line 14 "D:\2年次科目\チEム制佁E年\第1回\-\HLSL\ParticleInitializer_CS.hlsl"
 mov r0.z, r0.z  // r0.z <- f0
 
 #line 15
 nop 
 mul r0.w, r0.y, r0.z
 
-#line 23 "C:\Users\2230081\Desktop\-\HLSL\Common.hlsli"
+#line 23 "D:\2年次科目\チーム制作2年\第1回\-\HLSL\Common.hlsli"
 sincos r0.w, null, r0.w
 mul r0.w, r0.w, l(43758.546875)
 frc r0.w, r0.w  // r0.w <- <rand return value>
 
-#line 15 "C:\Users\2230081\Desktop\-\HLSL\ParticleInitializer_CS.hlsl"
+#line 15 "D:\2年次科目\チEム制佁E年\第1回\-\HLSL\ParticleInitializer_CS.hlsl"
 mov r0.w, r0.w  // r0.w <- f1
 
 #line 16
 nop 
 mul r0.y, r0.y, r0.w
 
-#line 23 "C:\Users\2230081\Desktop\-\HLSL\Common.hlsli"
+#line 23 "D:\2年次科目\チーム制作2年\第1回\-\HLSL\Common.hlsli"
 sincos r0.y, null, r0.y
 mul r0.y, r0.y, l(43758.546875)
 frc r0.y, r0.y  // r0.y <- <rand return value>
 
-#line 16 "C:\Users\2230081\Desktop\-\HLSL\ParticleInitializer_CS.hlsl"
+#line 16 "D:\2年次科目\チEム制佁E年\第1回\-\HLSL\ParticleInitializer_CS.hlsl"
 mov r0.y, r0.y  // r0.y <- f2
 
 #line 18

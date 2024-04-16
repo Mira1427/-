@@ -67,7 +67,7 @@ dcl_thread_group 16, 1, 1
 // Initial variable locations:
 //   vThreadID.x <- dtID.x; vThreadID.y <- dtID.y; vThreadID.z <- dtID.z
 //
-#line 8 "C:\Users\2230081\Desktop\-\HLSL\Particle_CS.hlsl"
+#line 8 "D:\2年次科目\チE"
 mov r0.x, vThreadID.x  // r0.x <- id
 
 #line 10

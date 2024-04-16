@@ -29,7 +29,7 @@ dcl_output o0.xyzw
 //   v2.x <- pin.texcoord.x; v2.y <- pin.texcoord.y; 
 //   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
 //
-#line 5 "C:\Users\2230081\Desktop\-\HLSL\primitivePS.hlsl"
+#line 5 "D:\2年次科目\チE"
 mov o0.xyzw, v1.xyzw
 ret 
 // Approximately 2 instruction slots used

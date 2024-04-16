@@ -57,7 +57,7 @@ dcl_temps 3
 //   v1.x <- pin.texcoord_.x; v1.y <- pin.texcoord_.y; 
 //   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
 //
-#line 8 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SkyMap_PS.hlsl"
+#line 8 "C:\Users\2230081\Desktop\-\HLSL\SkyMap_PS.hlsl"
 mul r0.x, v1.x, l(2.000000)
 mov r0.y, l(-1.000000)
 add r0.x, r0.y, r0.x

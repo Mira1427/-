@@ -70,16 +70,16 @@ dcl_temps 2
 //   o1.x <- <main return value>.color_.x; o1.y <- <main return value>.color_.y; o1.z <- <main return value>.color_.z; o1.w <- <main return value>.color_.w; 
 //   o0.x <- <main return value>.position_.x; o0.y <- <main return value>.position_.y; o0.z <- <main return value>.position_.z; o0.w <- <main return value>.position_.w
 //
-#line 16 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRenderer2D_VS.hlsl"
+#line 16 "C:\Users\2230081\Desktop\-\HLSL\DebugRenderer2D_VS.hlsl"
 nop 
 
-#line 15 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Common.hlsli"
+#line 15 "C:\Users\2230081\Desktop\-\HLSL\Common.hlsli"
 mul r0.x, cb0[2].z, l(0.017453)  // r0.x <- theta
 
 #line 16
 mov r0.x, r0.x  // r0.x <- <toRadian return value>
 
-#line 16 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRenderer2D_VS.hlsl"
+#line 16 "C:\Users\2230081\Desktop\-\HLSL\DebugRenderer2D_VS.hlsl"
 mov r0.x, r0.x  // r0.x <- theta
 
 #line 17
@@ -143,7 +143,7 @@ add r0.x, r0.z, r0.x
 #line 39
 nop 
 
-#line 4 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Common.hlsli"
+#line 4 "C:\Users\2230081\Desktop\-\HLSL\Common.hlsli"
 mul r0.y, r0.y, l(2.000000)
 div r0.y, r0.y, cb2[0].x
 mov r0.z, l(-1.000000)
@@ -163,7 +163,7 @@ mov r1.x, r1.x  // r1.x <- <screenToNDC return value>.x
 mov r1.y, r1.y  // r1.y <- <screenToNDC return value>.y
 mov r1.z, r1.z  // r1.z <- <screenToNDC return value>.z
 
-#line 39 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRenderer2D_VS.hlsl"
+#line 39 "C:\Users\2230081\Desktop\-\HLSL\DebugRenderer2D_VS.hlsl"
 mov r1.xyz, r1.xyzx  // r1.x <- vout.position_.x; r1.y <- vout.position_.y; r1.z <- vout.position_.z
 mov r1.w, l(1.000000)  // r1.w <- vout.position_.w
 

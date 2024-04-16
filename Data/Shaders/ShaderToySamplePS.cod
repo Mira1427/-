@@ -50,7 +50,7 @@ dcl_temps 13
 //   v1.x <- pin.texcoord_.x; v1.y <- pin.texcoord_.y; 
 //   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
 //
-#line 392 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\ShaderToySamplePS.hlsl"
+#line 392 "C:\Users\2230081\Desktop\-\HLSL\ShaderToySamplePS.hlsl"
 mov r0.xy, v0.xyxx  // r0.x <- fragCoord.x; r0.y <- fragCoord.y
 
 #line 394

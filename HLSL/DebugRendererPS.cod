@@ -27,7 +27,7 @@ dcl_output o0.xyzw
 //   v1.x <- vout.color_.x; v1.y <- vout.color_.y; v1.z <- vout.color_.z; v1.w <- vout.color_.w; 
 //   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
 //
-#line 5 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRendererPS.hlsl"
+#line 5 "C:\Users\2230081\Desktop\-\HLSL\DebugRendererPS.hlsl"
 mov o0.xyzw, v1.xyzw
 ret 
 // Approximately 2 instruction slots used

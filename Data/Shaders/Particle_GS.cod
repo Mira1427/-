@@ -96,7 +96,7 @@ dcl_maxout 4
 //   v[0][0].x <- input; 
 //   x0 <- corners; x1 <- texcoords
 //
-#line 8 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Particle_GS.hlsl"
+#line 8 "C:\Users\2230081\Desktop\-\HLSL\Particle_GS.hlsl"
 mov x0[0].xy, l(-1.000000,-1.000000,0,0)
 mov x0[1].xy, l(-1.000000,1.000000,0,0)
 mov x0[2].xy, l(1.000000,-1.000000,0,0)

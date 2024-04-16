@@ -26,7 +26,7 @@
 // TEXCOORD                 0   xy          2     NONE   float   xy  
 //
 vs_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_input v0.xyzw
 dcl_input v1.xy
 dcl_input v2.xyzw
@@ -38,13 +38,37 @@ dcl_input v7.xyzw
 dcl_output_siv o0.xyzw, position
 dcl_output o1.xyzw
 dcl_output o2.xy
-dcl_temps 1
-dp4 o0.x, v0.xyzw, v2.xyzw
-dp4 o0.y, v0.xyzw, v3.xyzw
-dp4 o0.z, v0.xyzw, v4.xyzw
-dp4 o0.w, v0.xyzw, v5.xyzw
-mov o1.xyzw, v7.xyzw
-mul r0.xy, v1.xyxx, v6.zwzz
-mul o2.xy, r0.xyxx, v6.xyxx
+dcl_temps 3
+//
+// Initial variable locations:
+//   v0.x <- position.x; v0.y <- position.y; v0.z <- position.z; v0.w <- position.w; 
+//   v1.x <- texcoord.x; v1.y <- texcoord.y; 
+//   v2.x <- ndcTransform._m00; v2.y <- ndcTransform._m10; v2.z <- ndcTransform._m20; v2.w <- ndcTransform._m30; 
+//   v3.x <- ndcTransform._m01; v3.y <- ndcTransform._m11; v3.z <- ndcTransform._m21; v3.w <- ndcTransform._m31; 
+//   v4.x <- ndcTransform._m02; v4.y <- ndcTransform._m12; v4.z <- ndcTransform._m22; v4.w <- ndcTransform._m32; 
+//   v5.x <- ndcTransform._m03; v5.y <- ndcTransform._m13; v5.z <- ndcTransform._m23; v5.w <- ndcTransform._m33; 
+//   v6.x <- texcoordTransform.x; v6.y <- texcoordTransform.y; v6.z <- texcoordTransform.z; v6.w <- texcoordTransform.w; 
+//   v7.x <- color.x; v7.y <- color.y; v7.z <- color.z; v7.w <- color.w; 
+//   o2.x <- <main return value>.texcoord.x; o2.y <- <main return value>.texcoord.y; 
+//   o1.x <- <main return value>.color.x; o1.y <- <main return value>.color.y; o1.z <- <main return value>.color.z; o1.w <- <main return value>.color.w; 
+//   o0.x <- <main return value>.position.x; o0.y <- <main return value>.position.y; o0.z <- <main return value>.position.z; o0.w <- <main return value>.position.w
+//
+#line 7 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\spriteBatchVS.hlsl"
+dp4 r0.x, v0.xyzw, v2.xyzw  // r0.x <- vout.position.x
+dp4 r0.y, v0.xyzw, v3.xyzw  // r0.y <- vout.position.y
+dp4 r0.z, v0.xyzw, v4.xyzw  // r0.z <- vout.position.z
+dp4 r0.w, v0.xyzw, v5.xyzw  // r0.w <- vout.position.w
+
+#line 8
+mul r1.xy, v1.xyxx, v6.zwzz
+mul r1.xy, r1.xyxx, v6.xyxx  // r1.x <- vout.texcoord.x; r1.y <- vout.texcoord.y
+
+#line 9
+mov r2.xyzw, v7.xyzw  // r2.x <- vout.color.x; r2.y <- vout.color.y; r2.z <- vout.color.z; r2.w <- vout.color.w
+
+#line 11
+mov o0.xyzw, r0.xyzw
+mov o1.xyzw, r2.xyzw
+mov o2.xy, r1.xyxx
 ret 
-// Approximately 8 instruction slots used
+// Approximately 11 instruction slots used

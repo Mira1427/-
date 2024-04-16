@@ -62,7 +62,7 @@
 // TEXCOORD                 0   xy          2     NONE   float   xy  
 //
 vs_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_constantbuffer CB1[4], immediateIndexed
 dcl_constantbuffer CB0[7], immediateIndexed
 dcl_input v0.xyz
@@ -70,25 +70,80 @@ dcl_input v1.xy
 dcl_output_siv o0.xyzw, position
 dcl_output o1.xyzw
 dcl_output o2.xy
-dcl_temps 2
-mov r0.xz, v0.xxyx
-mov r0.yw, cb0[5].xxxy
-dp2 r0.z, r0.zwzz, l(1.000000, 1.000000, 0.000000, 0.000000)
-dp2 r0.x, r0.xyxx, l(1.000000, 1.000000, 0.000000, 0.000000)
-mul r1.xyzw, r0.zzzz, cb0[1].xyzw
-mad r0.xyzw, r0.xxxx, cb0[0].xyzw, r1.xyzw
-mad r0.xyzw, v0.zzzz, cb0[2].xyzw, r0.xyzw
-add r0.xyzw, r0.xyzw, cb0[3].xyzw
-mov r1.xz, l(1.000000,0,1.000000,0)
-mov r1.yw, -cb0[5].xxxy
-dp2 r0.y, r0.ywyy, r1.zwzz
-dp2 r0.x, r0.xwxx, r1.xyxx
-mul r1.xyzw, r0.yyyy, cb1[1].xyzw
-mad r1.xyzw, r0.xxxx, cb1[0].xyzw, r1.xyzw
-mad r1.xyzw, r0.zzzz, cb1[2].xyzw, r1.xyzw
-mad o0.xyzw, r0.wwww, cb1[3].xyzw, r1.xyzw
-mov o1.xyzw, cb0[4].xyzw
-mad r0.xy, v1.xyxx, cb0[5].zwzz, cb0[6].xyxx
-div o2.xy, r0.xyxx, cb0[6].zwzz
+dcl_temps 5
+//
+// Initial variable locations:
+//   v0.x <- vin.position_.x; v0.y <- vin.position_.y; v0.z <- vin.position_.z; 
+//   v1.x <- vin.texcoord_.x; v1.y <- vin.texcoord_.y; 
+//   o2.x <- <main return value>.texcoord_.x; o2.y <- <main return value>.texcoord_.y; 
+//   o1.x <- <main return value>.color_.x; o1.y <- <main return value>.color_.y; o1.z <- <main return value>.color_.z; o1.w <- <main return value>.color_.w; 
+//   o0.x <- <main return value>.position_.x; o0.y <- <main return value>.position_.y; o0.z <- <main return value>.position_.z; o0.w <- <main return value>.position_.w
+//
+#line 13 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SpriteRenderer3D_VS.hlsl"
+itof r0.xyzw, l(0, 0, 1, 0)  // r0.x <- offsetTranslation._m02; r0.y <- offsetTranslation._m12; r0.z <- offsetTranslation._m22; r0.w <- offsetTranslation._m32
+itof r1.xyzw, l(0, 0, 0, 1)  // r1.x <- offsetTranslation._m03; r1.y <- offsetTranslation._m13; r1.z <- offsetTranslation._m23; r1.w <- offsetTranslation._m33
+itof r2.xyz, l(1, 0, 0, 0)  // r2.x <- offsetTranslation._m00; r2.y <- offsetTranslation._m10; r2.z <- offsetTranslation._m20
+itof r3.xyz, l(0, 1, 0, 0)  // r3.x <- offsetTranslation._m01; r3.y <- offsetTranslation._m11; r3.z <- offsetTranslation._m21
+mov r2.w, cb0[5].x  // r2.w <- offsetTranslation._m30
+mov r3.w, cb0[5].y  // r3.w <- offsetTranslation._m31
+
+#line 21
+mov r4.xyz, v0.xyzx
+mov r4.w, l(1.000000)
+dp4 r2.x, r4.xyzw, r2.xyzw  // r2.x <- worldPosition.x
+dp4 r2.y, r4.xyzw, r3.xyzw  // r2.y <- worldPosition.y
+dp4 r0.x, r4.xyzw, r0.xyzw  // r0.x <- worldPosition.z
+dp4 r0.y, r4.xyzw, r1.xyzw  // r0.y <- worldPosition.w
+
+#line 23
+mul r1.xyzw, r2.xxxx, cb0[0].xyzw
+mul r2.xyzw, r2.yyyy, cb0[1].xyzw
+add r1.xyzw, r1.xyzw, r2.xyzw
+mul r2.xyzw, r0.xxxx, cb0[2].xyzw
+add r1.xyzw, r1.xyzw, r2.xyzw
+mul r0.xyzw, r0.yyyy, cb0[3].xyzw
+add r0.xyzw, r0.xyzw, r1.xyzw  // r0.x <- worldPositionRotated.x; r0.y <- worldPositionRotated.y; r0.z <- worldPositionRotated.z; r0.w <- worldPositionRotated.w
+
+#line 25
+mov r1.w, -cb0[5].x  // r1.w <- offsetTranslationInverse._m30
+mov r2.w, -cb0[5].y  // r2.w <- offsetTranslationInverse._m31
+itof r3.xyzw, l(0, 0, 1, 0)  // r3.x <- offsetTranslationInverse._m02; r3.y <- offsetTranslationInverse._m12; r3.z <- offsetTranslationInverse._m22; r3.w <- offsetTranslationInverse._m32
+itof r4.xyzw, l(0, 0, 0, 1)  // r4.x <- offsetTranslationInverse._m03; r4.y <- offsetTranslationInverse._m13; r4.z <- offsetTranslationInverse._m23; r4.w <- offsetTranslationInverse._m33
+itof r1.xyz, l(1, 0, 0, 0)  // r1.x <- offsetTranslationInverse._m00; r1.y <- offsetTranslationInverse._m10; r1.z <- offsetTranslationInverse._m20
+itof r2.xyz, l(0, 1, 0, 0)  // r2.x <- offsetTranslationInverse._m01; r2.y <- offsetTranslationInverse._m11; r2.z <- offsetTranslationInverse._m21
+
+#line 33
+dp4 r1.x, r0.xyzw, r1.xyzw  // r1.x <- worldPositionRotated.x
+dp4 r1.y, r0.xyzw, r2.xyzw  // r1.y <- worldPositionRotated.y
+dp4 r1.z, r0.xyzw, r3.xyzw  // r1.z <- worldPositionRotated.z
+dp4 r0.x, r0.xyzw, r4.xyzw  // r0.x <- worldPositionRotated.w
+
+#line 35
+mul r2.xyzw, r1.xxxx, cb1[0].xyzw
+mul r3.xyzw, r1.yyyy, cb1[1].xyzw
+add r2.xyzw, r2.xyzw, r3.xyzw
+mul r1.xyzw, r1.zzzz, cb1[2].xyzw
+add r1.xyzw, r1.xyzw, r2.xyzw
+mul r0.xyzw, r0.xxxx, cb1[3].xyzw
+add r0.xyzw, r0.xyzw, r1.xyzw  // r0.x <- vout.position_.x; r0.y <- vout.position_.y; r0.z <- vout.position_.z; r0.w <- vout.position_.w
+
+#line 36
+mov r1.xyzw, cb0[4].xyzw  // r1.x <- vout.color_.x; r1.y <- vout.color_.y; r1.z <- vout.color_.z; r1.w <- vout.color_.w
+
+#line 38
+mul r2.x, v1.x, cb0[5].z
+add r2.x, r2.x, cb0[6].x
+div r2.x, r2.x, cb0[6].z  // r2.x <- texcoord.x
+mul r2.z, v1.y, cb0[5].w
+add r2.z, r2.z, cb0[6].y
+div r2.y, r2.z, cb0[6].w  // r2.y <- texcoord.y
+
+#line 41
+mov r2.xy, r2.xyxx  // r2.x <- vout.texcoord_.x; r2.y <- vout.texcoord_.y
+
+#line 43
+mov o0.xyzw, r0.xyzw
+mov o1.xyzw, r1.xyzw
+mov o2.xy, r2.xyxx
 ret 
-// Approximately 20 instruction slots used
+// Approximately 48 instruction slots used

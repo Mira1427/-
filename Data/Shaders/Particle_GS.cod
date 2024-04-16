@@ -76,46 +76,160 @@
 // TEXCOORD                 0   xy          2     NONE   float   xy  
 //
 gs_4_0
-dcl_globalFlags refactoringAllowed | enableRawAndStructuredBuffers
+dcl_globalFlags refactoringAllowed | enableRawAndStructuredBuffers | skipOptimization
 dcl_constantbuffer CB0[1], immediateIndexed
 dcl_constantbuffer CB1[4], immediateIndexed
 dcl_resource_structured t0, 48
 dcl_input v[1][0].x
-dcl_temps 3
+dcl_temps 7
+dcl_indexableTemp x0[4], 4
+dcl_indexableTemp x1[4], 4
 dcl_inputprimitive point 
 dcl_outputtopology trianglestrip 
 dcl_output_siv o0.xyzw, position
 dcl_output o1.xyzw
 dcl_output o2.xy
 dcl_maxout 4
-ld_structured r0.xyz, v[0][0].x, l(16), t0.xyzx
-mul r1.xyzw, r0.yyyy, cb1[1].xyzw
-mad r1.xyzw, r0.xxxx, cb1[0].xyzw, r1.xyzw
-mad r0.xyzw, r0.zzzz, cb1[2].xyzw, r1.xyzw
-add r0.xyzw, r0.xyzw, cb1[3].xyzw
-mad r1.xyzw, cb0[0].wwww, l(-1.000000, -1.777778, -1.000000, 1.777778), r0.xyxy
+//
+// Initial variable locations:
+//   m0 <- output; 
+//   v[0][0].x <- input; 
+//   x0 <- corners; x1 <- texcoords
+//
+#line 8 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Particle_GS.hlsl"
+mov x0[0].xy, l(-1.000000,-1.000000,0,0)
+mov x0[1].xy, l(-1.000000,1.000000,0,0)
+mov x0[2].xy, l(1.000000,-1.000000,0,0)
+mov x0[3].xy, l(1.000000,1.000000,0,0)
+
+#line 16
+mov x1[0].xy, l(0,1.000000,0,0)
+mov x1[1].xy, l(0,0,0,0)
+mov x1[2].xy, l(1.000000,1.000000,0,0)
+mov x1[3].xy, l(1.000000,0,0,0)
+
+#line 24
+ld_structured r0.x, v[0][0].x, l(0), t0.xxxx  // r0.x <- p.color_.x
+ld_structured r0.y, v[0][0].x, l(4), t0.xxxx  // r0.y <- p.color_.y
+ld_structured r0.z, v[0][0].x, l(8), t0.xxxx  // r0.z <- p.color_.z
+ld_structured r0.w, v[0][0].x, l(12), t0.xxxx  // r0.w <- p.color_.w
+ld_structured r1.x, v[0][0].x, l(16), t0.xxxx  // r1.x <- p.position_.x
+ld_structured r2.x, v[0][0].x, l(20), t0.xxxx  // r2.x <- p.position_.y
+ld_structured r3.x, v[0][0].x, l(24), t0.xxxx  // r3.x <- p.position_.z
+
+#line 26
+mov r1.y, l(1.777778)  // r1.y <- aspectRatio
+
+#line 27
+mul r4.y, r1.y, cb0[0].w  // r4.y <- scale.y
+mov r4.x, cb0[0].w  // r4.x <- scale.x
+
+#line 34
+itof r1.y, l(1)
+mul r5.xyzw, r1.xxxx, cb1[0].xyzw
+mul r6.xyzw, r2.xxxx, cb1[1].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw
+mul r6.xyzw, r3.xxxx, cb1[2].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw
+mul r6.xyzw, r1.yyyy, cb1[3].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw  // r5.x <- element.position_.x; r5.y <- element.position_.y; r5.z <- element.position_.z; r5.w <- element.position_.w
+
+#line 35
+mov r1.yz, x0[0].xxyx
+mul r1.yz, r4.xxyx, r1.yyzy
+add r1.yz, r1.yyzy, r5.xxyx  // r1.y <- element.position_.x; r1.z <- element.position_.y
+
+#line 37
+mov r0.xyzw, r0.xyzw  // r0.x <- element.color_.x; r0.y <- element.color_.y; r0.z <- element.color_.z; r0.w <- element.color_.w
+
+#line 38
+mov r2.yz, x1[0].xxyx  // r2.y <- element.texcoord_.x; r2.z <- element.texcoord_.y
+
+#line 39
+mov o0.xy, r1.yzyy
+mov o0.zw, r5.zzzw
+mov o1.xyzw, r0.xyzw
+mov o2.xy, r2.yzyy
+emit 
+
+#line 34
+itof r1.y, l(1)
+mul r5.xyzw, r1.xxxx, cb1[0].xyzw
+mul r6.xyzw, r2.xxxx, cb1[1].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw
+mul r6.xyzw, r3.xxxx, cb1[2].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw
+mul r6.xyzw, r1.yyyy, cb1[3].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw  // r5.x <- element.position_.x; r5.y <- element.position_.y; r5.z <- element.position_.z; r5.w <- element.position_.w
+
+#line 35
+mov r1.yz, x0[1].xxyx
+mul r1.yz, r4.xxyx, r1.yyzy
+add r1.yz, r1.yyzy, r5.xxyx  // r1.y <- element.position_.x; r1.z <- element.position_.y
+
+#line 38
+mov r2.yz, x1[1].xxyx
+
+#line 39
+mov o0.xy, r1.yzyy
+mov o0.zw, r5.zzzw
+mov o1.xyzw, r0.xyzw
+mov o2.xy, r2.yzyy
+emit 
+
+#line 34
+itof r1.y, l(1)
+mul r5.xyzw, r1.xxxx, cb1[0].xyzw
+mul r6.xyzw, r2.xxxx, cb1[1].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw
+mul r6.xyzw, r3.xxxx, cb1[2].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw
+mul r6.xyzw, r1.yyyy, cb1[3].xyzw
+add r5.xyzw, r5.xyzw, r6.xyzw  // r5.x <- element.position_.x; r5.y <- element.position_.y; r5.z <- element.position_.z; r5.w <- element.position_.w
+
+#line 35
+mov r1.yz, x0[2].xxyx
+mul r1.yz, r4.xxyx, r1.yyzy
+add r1.yz, r1.yyzy, r5.xxyx  // r1.y <- element.position_.x; r1.z <- element.position_.y
+
+#line 38
+mov r2.yz, x1[2].xxyx
+
+#line 39
+mov o0.xy, r1.yzyy
+mov o0.zw, r5.zzzw
+mov o1.xyzw, r0.xyzw
+mov o2.xy, r2.yzyy
+emit 
+
+#line 34
+itof r1.y, l(1)
+mul r5.xyzw, r1.xxxx, cb1[0].xyzw
+mul r2.xyzw, r2.xxxx, cb1[1].xyzw
+add r2.xyzw, r2.xyzw, r5.xyzw
+mul r3.xyzw, r3.xxxx, cb1[2].xyzw
+add r2.xyzw, r2.xyzw, r3.xyzw
+mul r1.xyzw, r1.yyyy, cb1[3].xyzw
+add r1.xyzw, r1.xyzw, r2.xyzw  // r1.x <- element.position_.x; r1.y <- element.position_.y; r1.z <- element.position_.z; r1.w <- element.position_.w
+
+#line 35
+mov r2.xy, x0[3].xyxx
+mul r2.xy, r4.xyxx, r2.xyxx
+add r1.xy, r1.xyxx, r2.xyxx
+
+#line 38
+mov r2.xy, x1[3].xyxx  // r2.x <- element.texcoord_.x; r2.y <- element.texcoord_.y
+
+#line 39
 mov o0.xy, r1.xyxx
-mov o0.zw, r0.zzzw
-ld_structured r2.xyzw, v[0][0].x, l(0), t0.xyzw
-mov o1.xyzw, r2.xyzw
-mov o2.xy, l(0,1.000000,0,0)
+mov o0.zw, r1.zzzw
+mov o1.xyzw, r0.xyzw
+mov o2.xy, r2.xyxx
 emit 
-mov o0.xy, r1.zwzz
-mov o0.zw, r0.zzzw
-mov o1.xyzw, r2.xyzw
-mov o2.xy, l(0,0,0,0)
-emit 
-mad r1.xyzw, cb0[0].wwww, l(1.000000, -1.777778, 1.000000, 1.777778), r0.xyxy
-mov o0.xy, r1.xyxx
-mov o0.zw, r0.zzzw
-mov o1.xyzw, r2.xyzw
-mov o2.xy, l(1.000000,1.000000,0,0)
-emit 
-mov o0.xy, r1.zwzz
-mov o0.zw, r0.zzzw
-mov o1.xyzw, r2.xyzw
-mov o2.xy, l(1.000000,0,0,0)
-emit 
+
+#line 42
 cut 
+
+#line 43
 ret 
-// Approximately 30 instruction slots used
+// Approximately 89 instruction slots used

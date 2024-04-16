@@ -28,183 +28,1561 @@
 // SV_TARGET                0   xyzw        0   TARGET   float   xyzw
 //
 ps_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_sampler s1, mode_default
 dcl_sampler s2, mode_default
 dcl_resource_texture2d (float,float,float,float) t0
 dcl_resource_texture2d (float,float,float,float) t1
 dcl_input_ps linear v1.xy
 dcl_output o0.xyzw
-dcl_temps 10
-resinfo_indexable(texture2d)(float,float,float,float) r0.xy, l(0), t1.xyzw
-div r1.xyzw, l(-3.000000, -3.000000, -1.000000, -2.000000), r0.xyyy
-add r2.xyzw, r1.xyxw, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r2.zwzz, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r2.xyz, r2.xyxx, t1.xyzw, s1
-mul r3.xyz, r3.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000)
-mad r2.xyz, r2.xyzx, l(0.000020, 0.000020, 0.000020, 0.000000), r3.xyzx
-add r0.zw, r1.xxxz, v1.xxxy
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r0.zwzz, t1.xyzw, s1
-mad r2.xyz, r3.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r2.xyzx
-mov r3.y, l(0)
-mov r3.x, r1.x
-add r0.zw, r3.xxxy, v1.xxxy
-sample_indexable(texture2d)(float,float,float,float) r4.xyz, r0.zwzz, t1.xyzw, s1
-mad r2.xyz, r4.xyzx, l(0.001768, 0.001768, 0.001768, 0.000000), r2.xyzx
-div r3.zw, l(1.000000, 1.000000, 1.000000, 1.000000), r0.xxxy
-add r4.xyzw, r3.xwzw, v1.xyxy
-mov r5.x, r3.x
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r4.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r4.xyz, r4.zwzz, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r2.xyzx
-div r6.xyzw, l(2.000000, 3.000000, -2.000000, -1.000000), r0.yyxx
-div r0.xy, l(3.000000, 2.000000, 0.000000, 0.000000), r0.xxxx
-mov r5.yz, r6.xxyx
-add r7.xyzw, r5.xyxz, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r8.xyz, r7.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.zwzz, t1.xyzw, s1
-mad r2.xyz, r8.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r2.xyzx
-mad r2.xyz, r7.xyzx, l(0.000020, 0.000020, 0.000020, 0.000000), r2.xyzx
-mov r1.x, r6.z
-add r7.xyzw, r1.xyxw, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r8.xyz, r7.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.zwzz, t1.xyzw, s1
-mad r2.xyz, r8.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r2.xyzx
-mad r2.xyz, r7.xyzx, l(0.002915, 0.002915, 0.002915, 0.000000), r2.xyzx
-add r7.xy, r1.xzxx, v1.xyxx
-mov r8.yzw, r1.wwzy
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.xyxx, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-mov r1.yz, l(0,0,0,0)
-add r7.xy, r1.xyxx, v1.xyxx
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.xyxx, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.021539, 0.021539, 0.021539, 0.000000), r2.xyzx
-mov r1.w, r3.w
-add r7.xy, r1.xwxx, v1.xyxx
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.xyxx, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-add r7.xyzw, r6.zxzy, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r9.xyz, r7.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.zwzz, t1.xyzw, s1
-mad r2.xyz, r9.xyzx, l(0.002915, 0.002915, 0.002915, 0.000000), r2.xyzx
-mad r2.xyz, r7.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r2.xyzx
-mov r8.x, r6.w
-add r6.xyzw, r6.wxwy, v1.xyxy
-add r7.xyzw, r8.xwxy, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r9.xyz, r7.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.zwzz, t1.xyzw, s1
-mad r2.xyz, r9.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r2.xyzx
-mad r2.xyz, r7.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-add r7.xy, r8.xzxx, v1.xyxx
-mov r1.x, r8.x
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.xyxx, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.058550, 0.058550, 0.058550, 0.000000), r2.xyzx
-mov r1.y, l(0)
-add r7.xy, r1.xyxx, v1.xyxx
-add r9.xyzw, r1.xwyw, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r7.xyxx, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.096532, 0.096532, 0.096532, 0.000000), r2.xyzx
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r9.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r9.xyz, r9.zwzz, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.058550, 0.058550, 0.058550, 0.000000), r2.xyzx
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r6.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r6.zwzz, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-mad r2.xyz, r6.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r2.xyzx
-mov r3.x, l(0)
-mov r3.yw, r8.wwwy
-add r6.xy, r3.xyxx, v1.xyxx
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r6.xyxx, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.001768, 0.001768, 0.001768, 0.000000), r2.xyzx
-mov r3.x, l(0)
-add r6.xy, r3.xwxx, v1.xyxx
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r6.xyxx, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.021539, 0.021539, 0.021539, 0.000000), r2.xyzx
-mov r8.x, l(0)
-add r6.xy, r8.xzxx, v1.xyxx
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r6.xyxx, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.096532, 0.096532, 0.096532, 0.000000), r2.xyzx
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, v1.xyxx, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.159155, 0.159155, 0.159155, 0.000000), r2.xyzx
-mad r2.xyz, r9.xyzx, l(0.096532, 0.096532, 0.096532, 0.000000), r2.xyzx
-mov r5.w, l(0)
-add r6.xyzw, r5.wywz, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r7.xyz, r6.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r6.zwzz, t1.xyzw, s1
-mad r2.xyz, r7.xyzx, l(0.021539, 0.021539, 0.021539, 0.000000), r2.xyzx
-mad r2.xyz, r6.xyzx, l(0.001768, 0.001768, 0.001768, 0.000000), r2.xyzx
-add r5.xw, r3.zzzy, v1.xxxy
-mov r0.zw, r3.yyyw
-add r3.xy, r3.zwzz, v1.xyxx
-mov r8.w, r3.z
+dcl_temps 5
+//
+// Initial variable locations:
+//   v0.x <- pin.position.x; v0.y <- pin.position.y; v0.z <- pin.position.z; v0.w <- pin.position.w; 
+//   v1.x <- pin.texcoord.x; v1.y <- pin.texcoord.y; 
+//   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
+//
+#line 12 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\BlurPS.hlsl"
+mov r0.x, l(0)  // r0.x <- mipLevel
+
+#line 13
+resinfo_indexable(texture2d)(float,float,float,float) r0.xy, r0.x, t1.xyzw
+ftoi r0.x, r0.x  // r0.x <- width
+ftoi r0.y, r0.y  // r0.y <- height
+
+#line 15
+sample_indexable(texture2d)(float,float,float,float) r1.xyzw, v1.xyxx, t0.xyzw, s2  // r1.x <- color.x; r1.y <- color.y; r1.z <- color.z; r1.w <- color.w
+
+#line 16
+mov r1.w, r1.w  // r1.w <- alpha
+
+#line 18
+itof r2.xyz, l(0, 0, 0, 0)  // r2.x <- blurColor.x; r2.y <- blurColor.y; r2.z <- blurColor.z
+
+#line 19
+itof r0.z, l(0)  // r0.z <- gaussianKernelTotal
+
+#line 25
+mov r0.w, l(-3)  // r0.w <- x
+
+#line 28
+mov r2.w, l(-3)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-2), l(-2)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-2)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
 sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r5.xwxx, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r2.xyzx
-mad r2.xyz, r3.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-add r3.xyzw, r8.wzwx, v1.xyxy
-mov r1.y, r8.z
-sample_indexable(texture2d)(float,float,float,float) r6.xyz, r3.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.zwzz, t1.xyzw, s1
-mad r2.xyz, r6.xyzx, l(0.058550, 0.058550, 0.058550, 0.000000), r2.xyzx
-mad r2.xyz, r3.xyzx, l(0.096532, 0.096532, 0.096532, 0.000000), r2.xyzx
-mad r2.xyz, r4.xyzx, l(0.058550, 0.058550, 0.058550, 0.000000), r2.xyzx
-mov r8.yz, r5.yyzy
-add r3.xy, r8.wyww, v1.xyxx
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-1), l(-1)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-1)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
 sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
-mad r2.xyz, r3.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-add r3.xy, r8.wzww, v1.xyxx
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r2.w, l(1), l(-1)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r0.w, r0.w
+mul r0.w, r0.w, l(1.000000)
+itof r3.y, r0.x
+div r4.x, r0.w, r3.y
+itof r0.w, r2.w
+mul r0.w, r0.w, l(1.000000)
+itof r2.w, r0.y
+div r4.y, r0.w, r2.w
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 28
+mov r0.w, l(-3)  // r0.w <- y
+
+#line 30
+imul null, r2.w, l(-2), l(-2)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-2)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r0.w, r0.w
+mul r0.w, r0.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r0.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
 sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
-mad r2.xyz, r3.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r2.xyzx
-add r3.xyzw, r0.yzyw, v1.xyxy
-add r4.xyzw, r0.xzxw, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r5.xyz, r3.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.zwzz, t1.xyzw, s1
-mad r2.xyz, r5.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r2.xyzx
-mad r2.xyz, r3.xyzx, l(0.002915, 0.002915, 0.002915, 0.000000), r2.xyzx
-mov r1.x, r0.y
-add r3.xy, r1.xyxx, v1.xyxx
-mov r0.yw, r1.yyyw
-add r1.yw, r1.xxxw, v1.xxxy
-sample_indexable(texture2d)(float,float,float,float) r5.xyz, r1.ywyy, t1.xyzw, s1
-add r6.xyzw, r0.xyxw, v1.xyxy
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r0.w, l(-2), l(-2)
+imul null, r2.w, l(-2), l(-2)
+iadd r0.w, r0.w, r2.w
+ineg r0.w, r0.w
+itof r0.w, r0.w
+div r0.w, r0.w, l(2.000000)
+mul r0.w, r0.w, l(1.442695)
+exp r0.w, r0.w
+div r0.w, r0.w, l(6.283185)  // r0.w <- gaussianKernel
+
+#line 33
+itof r2.w, l(-2)
+mul r2.w, r2.w, l(1.000000)
+itof r3.x, r0.x
+div r3.x, r2.w, r3.x
+itof r2.w, l(-2)
+mul r2.w, r2.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r2.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
 sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
-mad r2.xyz, r3.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-add r0.yw, r1.xxxz, v1.xxxy
-mov r8.x, r1.x
-add r1.xyzw, r8.xyxz, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r0.ywyy, t1.xyzw, s1
-mad r2.xyz, r3.xyzx, l(0.021539, 0.021539, 0.021539, 0.000000), r2.xyzx
-mad r2.xyz, r5.xyzx, l(0.013064, 0.013064, 0.013064, 0.000000), r2.xyzx
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r1.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r1.xyz, r1.zwzz, t1.xyzw, s1
-mad r2.xyz, r3.xyzx, l(0.002915, 0.002915, 0.002915, 0.000000), r2.xyzx
-mad r1.xyz, r1.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r2.xyzx
-sample_indexable(texture2d)(float,float,float,float) r2.xyz, r4.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r4.zwzz, t1.xyzw, s1
-mad r1.xyz, r2.xyzx, l(0.000020, 0.000020, 0.000020, 0.000000), r1.xyzx
-mad r1.xyz, r3.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r1.xyzx
-sample_indexable(texture2d)(float,float,float,float) r2.xyz, r6.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r3.xyz, r6.zwzz, t1.xyzw, s1
-mad r1.xyz, r2.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r1.xyzx
-mov r0.z, l(0)
-add r0.yz, r0.xxzx, v1.xxyx
-mov r8.x, r0.x
-add r2.xyzw, r8.xyxz, v1.xyxy
-sample_indexable(texture2d)(float,float,float,float) r0.xyz, r0.yzyy, t1.xyzw, s1
-mad r0.xyz, r0.xyzx, l(0.001768, 0.001768, 0.001768, 0.000000), r1.xyzx
-mad r0.xyz, r3.xyzx, l(0.001072, 0.001072, 0.001072, 0.000000), r0.xyzx
-sample_indexable(texture2d)(float,float,float,float) r1.xyz, r2.xyxx, t1.xyzw, s1
-sample_indexable(texture2d)(float,float,float,float) r2.xyz, r2.zwzz, t1.xyzw, s1
-mad r0.xyz, r1.xyzx, l(0.000239, 0.000239, 0.000239, 0.000000), r0.xyzx
-mad r0.xyz, r2.xyzx, l(0.000020, 0.000020, 0.000020, 0.000000), r0.xyzx
-sample_indexable(texture2d)(float,float,float,float) r1.xyzw, v1.xyxx, t0.xyzw, s2
-mad r0.xyz, r0.xyzx, l(1.000542, 1.000542, 1.000542, 0.000000), r1.xyzx
-mov o0.w, r1.w
-mul r0.xyz, r0.xyzx, l(-1.731234, -1.731234, -1.731234, 0.000000)
+mul r3.xyz, r0.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.w, r0.z
+
+#line 30
+imul null, r0.w, l(-2), l(-2)
+imul null, r2.w, l(-1), l(-1)
+iadd r0.w, r0.w, r2.w
+ineg r0.w, r0.w
+itof r0.w, r0.w
+div r0.w, r0.w, l(2.000000)
+mul r0.w, r0.w, l(1.442695)
+exp r0.w, r0.w
+div r0.w, r0.w, l(6.283185)  // r0.w <- gaussianKernel
+
+#line 33
+itof r2.w, l(-2)
+mul r2.w, r2.w, l(1.000000)
+itof r3.x, r0.x
+div r3.x, r2.w, r3.x
+itof r2.w, l(-1)
+mul r2.w, r2.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r2.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r0.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.w, r0.z
+
+#line 37
+iadd r0.w, l(1), l(-1)  // r0.w <- y
+
+#line 30
+imul null, r2.w, l(-2), l(-2)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-2)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, r0.w
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r0.w, r0.w, l(1)
+
+#line 30
+imul null, r2.w, l(-2), l(-2)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-2)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, r0.w
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r0.w, r0.w, l(1)
+
+#line 30
+imul null, r2.w, l(-2), l(-2)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-2)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, r0.w
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r0.w, r0.w, l(1)
+
+#line 30
+imul null, r2.w, l(-2), l(-2)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-2)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r0.w, r0.w
+mul r0.w, r0.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r0.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 28
+mov r0.w, l(-3)  // r0.w <- y
+
+#line 30
+imul null, r2.w, l(-1), l(-1)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-1)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r0.w, r0.w
+mul r0.w, r0.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r0.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r0.w, l(-1), l(-1)
+imul null, r2.w, l(-2), l(-2)
+iadd r0.w, r0.w, r2.w
+ineg r0.w, r0.w
+itof r0.w, r0.w
+div r0.w, r0.w, l(2.000000)
+mul r0.w, r0.w, l(1.442695)
+exp r0.w, r0.w
+div r0.w, r0.w, l(6.283185)  // r0.w <- gaussianKernel
+
+#line 33
+itof r2.w, l(-1)
+mul r2.w, r2.w, l(1.000000)
+itof r3.x, r0.x
+div r3.x, r2.w, r3.x
+itof r2.w, l(-2)
+mul r2.w, r2.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r2.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r0.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.w, r0.z
+
+#line 30
+imul null, r0.w, l(-1), l(-1)
+imul null, r2.w, l(-1), l(-1)
+iadd r0.w, r0.w, r2.w
+ineg r0.w, r0.w
+itof r0.w, r0.w
+div r0.w, r0.w, l(2.000000)
+mul r0.w, r0.w, l(1.442695)
+exp r0.w, r0.w
+div r0.w, r0.w, l(6.283185)  // r0.w <- gaussianKernel
+
+#line 33
+itof r2.w, l(-1)
+mul r2.w, r2.w, l(1.000000)
+itof r3.x, r0.x
+div r3.x, r2.w, r3.x
+itof r2.w, l(-1)
+mul r2.w, r2.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r2.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r0.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.w, r0.z
+
+#line 37
+iadd r0.w, l(1), l(-1)  // r0.w <- y
+
+#line 30
+imul null, r2.w, l(-1), l(-1)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-1)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, r0.w
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r0.w, r0.w, l(1)
+
+#line 30
+imul null, r2.w, l(-1), l(-1)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-1)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, r0.w
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r0.w, r0.w, l(1)
+
+#line 30
+imul null, r2.w, l(-1), l(-1)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-1)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, r0.w
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r0.w, r0.w, l(1)
+
+#line 30
+imul null, r2.w, l(-1), l(-1)
+imul null, r3.x, r0.w, r0.w
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, l(-1)
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r0.w, r0.w
+mul r0.w, r0.w, l(1.000000)
+itof r3.z, r0.y
+div r3.y, r0.w, r3.z
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 38
+iadd r0.w, l(1), l(-1)  // r0.w <- x
+
+#line 28
+mov r2.w, l(-3)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-2), l(-2)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-2)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-1), l(-1)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-1)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r2.w, l(1), l(-1)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 38
+iadd r0.w, r0.w, l(1)
+
+#line 28
+mov r2.w, l(-3)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-2), l(-2)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-2)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-1), l(-1)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-1)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r2.w, l(1), l(-1)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 38
+iadd r0.w, r0.w, l(1)
+
+#line 28
+mov r2.w, l(-3)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-2), l(-2)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-2)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-1), l(-1)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-1)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r2.w, l(1), l(-1)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 38
+iadd r0.w, r0.w, l(1)
+
+#line 28
+mov r2.w, l(-3)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r2.w, r2.w
+mul r2.w, r2.w, l(1.000000)
+itof r3.y, r0.y
+div r4.y, r2.w, r3.y
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-2), l(-2)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-2)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 30
+imul null, r2.w, r0.w, r0.w
+imul null, r3.x, l(-1), l(-1)
+iadd r2.w, r2.w, r3.x
+ineg r2.w, r2.w
+itof r2.w, r2.w
+div r2.w, r2.w, l(2.000000)
+mul r2.w, r2.w, l(1.442695)
+exp r2.w, r2.w
+div r2.w, r2.w, l(6.283185)  // r2.w <- gaussianKernel
+
+#line 33
+itof r3.x, r0.w
+mul r3.x, r3.x, l(1.000000)
+itof r3.y, r0.x
+div r3.x, r3.x, r3.y
+itof r3.z, l(-1)
+mul r3.z, r3.z, l(1.000000)
+itof r3.w, r0.y
+div r3.y, r3.z, r3.w
+add r3.xy, r3.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r3.xyz, r3.xyxx, t1.xyzw, s1
+mul r3.xyz, r2.wwww, r3.xyzx
+add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 36
+add r0.z, r0.z, r2.w
+
+#line 37
+iadd r2.w, l(1), l(-1)  // r2.w <- y
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r3.y, r0.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.x
+div r4.x, r3.y, r3.z
+itof r3.y, r2.w
+mul r3.y, r3.y, l(1.000000)
+itof r3.z, r0.y
+div r4.y, r3.y, r3.z
+add r3.yz, r4.xxyx, v1.xxyx
+sample_indexable(texture2d)(float,float,float,float) r3.yzw, r3.yzyy, t1.wxyz, s1
+mul r3.yzw, r3.xxxx, r3.yyzw
+add r2.xyz, r2.xyzx, r3.yzwy
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 37
+iadd r2.w, r2.w, l(1)
+
+#line 30
+imul null, r3.x, r0.w, r0.w
+imul null, r3.y, r2.w, r2.w
+iadd r3.x, r3.y, r3.x
+ineg r3.x, r3.x
+itof r3.x, r3.x
+div r3.x, r3.x, l(2.000000)
+mul r3.x, r3.x, l(1.442695)
+exp r3.x, r3.x
+div r3.x, r3.x, l(6.283185)  // r3.x <- gaussianKernel
+
+#line 33
+itof r0.w, r0.w
+mul r0.w, r0.w, l(1.000000)
+itof r0.x, r0.x
+div r4.x, r0.w, r0.x
+itof r0.x, r2.w
+mul r0.x, r0.x, l(1.000000)
+itof r0.y, r0.y
+div r4.y, r0.x, r0.y
+add r0.xy, r4.xyxx, v1.xyxx
+sample_indexable(texture2d)(float,float,float,float) r0.xyw, r0.xyxx, t1.xywz, s1
+mul r0.xyw, r3.xxxx, r0.xyxw
+add r0.xyw, r0.xyxw, r2.xyxz  // r0.x <- blurColor.x; r0.y <- blurColor.y; r0.w <- blurColor.z
+
+#line 36
+add r0.z, r0.z, r3.x
+
+#line 40
+div r0.xyz, r0.xywx, r0.zzzz  // r0.z <- blurColor.z
+
+#line 41
+mov r0.w, l(1.000000)  // r0.w <- bloomIntensity
+
+#line 42
+mul r0.xyz, r0.wwww, r0.xyzx
+add r0.xyz, r0.xyzx, r1.xyzx  // r0.x <- color.x; r0.y <- color.y; r0.z <- color.z
+
+#line 46
+mov r0.w, l(1.200000)  // r0.w <- exprosure
+
+#line 47
+itof r1.xyz, l(1, 1, 1, 0)
+mov r0.xyz, -r0.xyzx
+mul r0.xyz, r0.wwww, r0.xyzx
+mul r0.xyz, r0.xyzx, l(1.442695, 1.442695, 1.442695, 0.000000)
 exp r0.xyz, r0.xyzx
-add r0.xyz, -r0.xyzx, l(1.000000, 1.000000, 1.000000, 0.000000)
+mov r0.xyz, -r0.xyzx
+add r0.xyz, r0.xyzx, r1.xyzx  // r0.x <- color.x; r0.y <- color.y; r0.z <- color.z
+
+#line 53
 log r0.xyz, r0.xyzx
 mul r0.xyz, r0.xyzx, l(0.454545, 0.454545, 0.454545, 0.000000)
-exp o0.xyz, r0.xyzx
+exp r0.xyz, r0.xyzx  // r0.x <- color.x; r0.y <- color.y; r0.z <- color.z
+
+#line 56
+mov o0.xyz, r0.xyzx
+mov o0.w, r1.w
 ret 
-// Approximately 171 instruction slots used
+// Approximately 1144 instruction slots used

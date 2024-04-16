@@ -57,28 +57,94 @@
 // -------------------- ----- ------ -------- -------- ------- ------
 // no Output
 cs_4_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_constantbuffer CB0[2], immediateIndexed
 dcl_uav_structured u0, 48
 dcl_input vThreadID.x
-dcl_temps 5
+dcl_temps 9
 dcl_thread_group 16, 1, 1
-ld_structured r0.xyzw, vThreadID.x, l(16), u0.xyzw
-ld_structured r1.xyz, vThreadID.x, l(32), u0.xyzx
-mad r1.w, cb0[1].y, l(-0.500000), r1.y
-mad r2.xyz, r1.xwzx, cb0[1].yyyy, r0.xyzx
-lt r3.x, r2.y, l(0.000000)
-mov r2.w, r1.x
-movc r4.xyzw, r3.xxxx, l(0,0,0,0), r2.xyzw
-movc r1.xw, r3.xxxx, l(0,0,0,0), r1.wwwz
-mov r2.xyz, r0.xyzx
-lt r0.x, l(10.000000), r0.w
-add r3.w, r0.w, cb0[1].y
-movc r2.xyzw, r0.xxxx, r4.xyzw, r2.xyzw
-movc r0.yz, r0.xxxx, r1.xxwx, r1.yyzy
-mov r3.xyz, r2.xyzx
-mov r0.x, r2.w
-store_structured u0.xyzw, vThreadID.x, l(16), r3.xyzw
-store_structured u0.xyz, vThreadID.x, l(32), r0.xyzx
+//
+// Initial variable locations:
+//   vThreadID.x <- dtID.x; vThreadID.y <- dtID.y; vThreadID.z <- dtID.z
+//
+#line 8 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Particle_CS.hlsl"
+mov r0.x, vThreadID.x  // r0.x <- id
+
+#line 10
+ld_structured r1.x, r0.x, l(0), u0.xxxx
+ld_structured r2.x, r0.x, l(4), u0.xxxx
+ld_structured r3.x, r0.x, l(8), u0.xxxx
+ld_structured r4.x, r0.x, l(12), u0.xxxx
+ld_structured r5.x, r0.x, l(16), u0.xxxx  // r5.x <- p.position_.x
+ld_structured r5.y, r0.x, l(20), u0.xxxx  // r5.y <- p.position_.y
+ld_structured r5.z, r0.x, l(24), u0.xxxx  // r5.z <- p.position_.z
+ld_structured r6.x, r0.x, l(28), u0.xxxx
+ld_structured r5.w, r0.x, l(32), u0.xxxx  // r5.w <- p.velocity_.x
+ld_structured r7.x, r0.x, l(36), u0.xxxx  // r7.x <- p.velocity_.y
+ld_structured r7.y, r0.x, l(40), u0.xxxx  // r7.y <- p.velocity_.z
+ld_structured r8.x, r0.x, l(44), u0.xxxx
+mov r1.x, r1.x  // r1.x <- p.color_.x
+mov r2.x, r2.x  // r2.x <- p.color_.y
+mov r3.x, r3.x  // r3.x <- p.color_.z
+mov r4.x, r4.x  // r4.x <- p.color_.w
+mov r6.x, r6.x  // r6.x <- p.age_
+mov r8.x, r8.x  // r8.x <- p.state_
+
+#line 12
+lt r0.y, l(10.000000), r6.x
+if_nz r0.y
+
+#line 14
+  mov r0.y, l(-0.500000)  // r0.y <- g
+
+#line 15
+  mul r0.y, r0.y, cb0[1].y
+  add r7.x, r0.y, r7.x
+
+#line 16
+  mov r7.z, r5.w
+  mul r0.yzw, r7.zzxy, cb0[1].yyyy
+  add r5.xyz, r0.yzwy, r5.xyzx
+
+#line 18
+  lt r0.y, r5.y, l(0.000000)
+  if_nz r0.y
+
+#line 20
+    mov r7.xyz, l(0,0,0,0)  // r7.z <- p.velocity_.x
+
+#line 21
+    mov r5.xyz, l(0,0,0,0)
+
+#line 22
+    mov r5.w, r7.z
+    mov r5.xyzw, r5.xyzw  // r5.w <- p.velocity_.x
+  else 
+    mov r5.w, r7.z
+    mov r5.xyzw, r5.xyzw  // r5.w <- p.velocity_.x
+    mov r7.xy, r7.xyxx
+  endif 
+
+#line 23
+endif 
+
+#line 25
+add r0.y, r6.x, cb0[1].y  // r0.y <- p.age_
+
+#line 27
+store_structured u0.x, r0.x, l(0), r1.x
+store_structured u0.x, r0.x, l(4), r2.x
+store_structured u0.x, r0.x, l(8), r3.x
+store_structured u0.x, r0.x, l(12), r4.x
+store_structured u0.x, r0.x, l(16), r5.x
+store_structured u0.x, r0.x, l(20), r5.y
+store_structured u0.x, r0.x, l(24), r5.z
+store_structured u0.x, r0.x, l(28), r0.y
+store_structured u0.x, r0.x, l(32), r5.w
+store_structured u0.x, r0.x, l(36), r7.x
+store_structured u0.x, r0.x, l(40), r7.y
+store_structured u0.x, r0.x, l(44), r8.x
+
+#line 28
 ret 
-// Approximately 18 instruction slots used
+// Approximately 53 instruction slots used

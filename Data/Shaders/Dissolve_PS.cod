@@ -44,7 +44,7 @@
 // SV_TARGET                0   xyzw        0   TARGET   float   xyzw
 //
 ps_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_constantbuffer CB3[1], immediateIndexed
 dcl_sampler s2, mode_default
 dcl_resource_texture2d (float,float,float,float) t0
@@ -53,12 +53,30 @@ dcl_input_ps linear v1.xyzw
 dcl_input_ps linear v2.xy
 dcl_output o0.xyzw
 dcl_temps 2
-sample_indexable(texture2d)(float,float,float,float) r0.x, v2.xyxx, t1.xyzw, s2
-min r0.x, r0.x, l(0.999000)
-add r0.x, r0.x, cb3[0].x
-round_ni r0.x, r0.x
-sample_indexable(texture2d)(float,float,float,float) r1.xyzw, v2.xyxx, t0.xyzw, s2
-add r1.w, -r0.x, r1.w
-mul o0.xyzw, r1.xyzw, v1.xyzw
+//
+// Initial variable locations:
+//   v0.x <- vout.position_.x; v0.y <- vout.position_.y; v0.z <- vout.position_.z; v0.w <- vout.position_.w; 
+//   v1.x <- vout.color_.x; v1.y <- vout.color_.y; v1.z <- vout.color_.z; v1.w <- vout.color_.w; 
+//   v2.x <- vout.texcoord_.x; v2.y <- vout.texcoord_.y; 
+//   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
+//
+#line 20 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Dissolve_PS.hlsl"
+sample_indexable(texture2d)(float,float,float,float) r0.xyzw, v2.xyxx, t0.xyzw, s2  // r0.x <- color.x; r0.y <- color.y; r0.z <- color.z; r0.w <- color.w
+
+#line 21
+sample_indexable(texture2d)(float,float,float,float) r1.x, v2.xyxx, t1.xyzw, s2
+mov r1.x, r1.x  // r1.x <- noise.x
+
+#line 23
+min r1.x, r1.x, l(0.999000)
+add r1.x, r1.x, cb3[0].x
+round_ni r1.x, r1.x  // r1.x <- alpha
+
+#line 24
+mov r1.x, -r1.x
+add r0.w, r0.w, r1.x
+
+#line 26
+mul o0.xyzw, r0.xyzw, v1.xyzw
 ret 
-// Approximately 8 instruction slots used
+// Approximately 10 instruction slots used

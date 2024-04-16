@@ -211,10 +211,10 @@ void Framework::update(float elapsedTime/*Elapsed seconds from last frame*/) {
 	}
 
 	// --- フルスクリーン ---
-	if (GetAsyncKeyState(VK_MENU) & 1)
-	{
-		window::stylize(!window::isFullScreen());
-	}
+	//if (GetAsyncKeyState(VK_MENU) & 1)
+	//{
+	//	window::stylize(!window::isFullScreen());
+	//}
 
 
 #ifdef USE_IMGUI

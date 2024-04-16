@@ -20,5 +20,6 @@ public:
 	static BlockBehavior			blockBehavior_;
 	static ButtonManagerBehavior	buttonManager_;
 	static TitleStartButtonBehavior titleStartButton_;
+	static TitleEndButtonBehavior	titleEndButton_;
 };
 

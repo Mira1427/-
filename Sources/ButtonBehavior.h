@@ -25,7 +25,17 @@ public:
 };
 
 
+// --- タイトル画面からゲーム画面へのボタン ---
 class TitleStartButtonBehavior final : public SceneTransitionBehavior
+{
+public:
+	void execute(GameObject* obj, float elapsedTime);
+	void hit(GameObject* src, GameObject* dst, float elapsedTime) {};
+};
+
+
+// --- タイトル画面から終了するボタン ---
+class TitleEndButtonBehavior final : public Behavior
 {
 public:
 	void execute(GameObject* obj, float elapsedTime);

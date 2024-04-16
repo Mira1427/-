@@ -9,5 +9,6 @@ PickAxeBehavior		BehaviorManager::pickAxeBehavior_;
 BlockBehavior		BehaviorManager::blockBehavior_;
 
 // --- ƒ{ƒ^ƒ“ ---
-ButtonManagerBehavior	BehaviorManager::buttonManager_;
+ButtonManagerBehavior	 BehaviorManager::buttonManager_;
 TitleStartButtonBehavior BehaviorManager::titleStartButton_;
+TitleEndButtonBehavior	 BehaviorManager::titleEndButton_;

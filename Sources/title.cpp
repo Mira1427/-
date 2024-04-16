@@ -57,6 +57,14 @@ void Title::update(float elapsedTime) {
 		{
 			startButton->name_ = u8"スタートボタン";
 			startButton->parent_ = buttonManager;
+			startButton->eraser_ = &EraserManager::titleEraser_;
+		}
+
+		auto* endButton = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::titleEndButton_);
+		{
+			endButton->name_ = u8"終了ボタン";
+			endButton->parent_ = buttonManager;
+			endButton->eraser_ = &EraserManager::titleEraser_;
 		}
 	}
 

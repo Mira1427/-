@@ -109,7 +109,7 @@ SkinnedMesh::SkinnedMesh(ID3D11Device* device, const char* fbxFileName, bool tri
 
 				traverse(fbxNode->GetChild(childIndex));
 			}
-		} };
+		}};
 
 		traverse(fbxScene->GetRootNode());
 
@@ -130,15 +130,18 @@ SkinnedMesh::SkinnedMesh(ID3D11Device* device, const char* fbxFileName, bool tri
 
 void SkinnedMesh::fetchMeshes(fbxsdk::FbxScene* fbxScene, std::vector<Mesh>& meshes) {
 
-	for (const NodeTree::Node& node : sceneView.nodes) {
-
-		if (node.attribute != fbxsdk::FbxNodeAttribute::EType::eMesh) {
-
+	for (const NodeTree::Node& node : sceneView.nodes)
+	{
+		if (node.attribute != fbxsdk::FbxNodeAttribute::EType::eMesh)
+		{
 			continue;
 		}
 
 		fbxsdk::FbxNode* fbxNode{ fbxScene->FindNodeByName(node.name.c_str()) };
 		fbxsdk::FbxMesh* fbxMesh{ fbxNode->GetMesh() };
+
+		if (!fbxMesh)
+			continue;
 
 		Mesh& mesh{ meshes.emplace_back() };
 

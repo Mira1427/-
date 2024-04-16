@@ -58,8 +58,10 @@ void Game::update(float elapsedTime)
 				player->addComponent<RigidBodyComponent>();
 				player->addCollider<BoxCollider>();
 
-				auto* staticMeshRenderer = player->addComponent<StaticMeshRendererComponent>();
-				staticMeshRenderer->model_ = std::make_unique<StaticMesh>(Graphics::instance().getDevice(), L"./Data/Models/ObjTest/test2.obj", false);
+				auto* MeshRenderer = player->addComponent<SkinnedMeshRendererComponent>();
+				MeshRenderer->pModel_ = std::make_unique<SkinnedMesh>(Graphics::instance().getDevice(), "./Data/Models/chara.fbx", true);
+
+				player->addComponent<AnimatorComponent>();
 			}
 
 			auto* pickAxe = GameObjectManager::instance().add(std::make_shared<GameObject>(), Vector3(), &BehaviorManager::pickAxeBehavior_);

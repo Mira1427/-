@@ -28,6 +28,8 @@ void BlockBehavior::execute(GameObject* obj, float elapsedTime)
 		if (block->life_ <= 0)
 			obj->destroy();
 
+		obj->transform_->position_.x -= elapsedTime;
+
 		obj->transform_->transform();
 
 		break;

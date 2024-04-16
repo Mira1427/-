@@ -49,6 +49,15 @@ void PlayerBehavior::execute(GameObject* obj, float elapsedTime)
 
 		turn(obj, rigidBody->velocity_.xz(), 1000.0f, elapsedTime);
 
+		obj->transform_->position_.x -= elapsedTime;
+
+		auto* animator = obj->getComponent<AnimatorComponent>();
+		if (animator)
+		{
+			animator->update(elapsedTime);
+			animator->updateNodeTransform();
+		}
+
 		obj->transform_->transform();
 
 		break;

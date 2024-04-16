@@ -52,9 +52,9 @@ void DebugCameraBehavior::applyMayaControl(GameObject* obj, float elapsedTime)
 		const float moveY = static_cast<float>(input::getCursorDeltaY() * moveSpeed);
 
 		obj->transform_->position_ -=  camera->rightVec_ * moveX;
-		obj->transform_->position_ += -camera->upVec_	 * moveY;
+		obj->transform_->position_ -= -camera->upVec_	 * moveY;
 		camera->target_ -=  camera->rightVec_ * moveX;
-		camera->target_ += -camera->upVec_	  * moveY;
+		camera->target_ -= -camera->upVec_	  * moveY;
 	}
 
 	if (GetAsyncKeyState(VK_MENU) && input::state(input::LMB))

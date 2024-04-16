@@ -195,26 +195,26 @@ void Framework::update(float elapsedTime/*Elapsed seconds from last frame*/) {
 	input::update();
 
 	// --- ウィンドウを閉じる ---
-	if (GetAsyncKeyState(VK_ESCAPE))
+	if (GetAsyncKeyState(VK_ESCAPE) & 1)
 		window::close();
 
 	// --- 1280 * 720 ---
-	if (GetAsyncKeyState(VK_F1))
+	if (GetAsyncKeyState(VK_F1) & 1)
 	{
 		SetWindowPos(window::getHwnd(), NULL, 0, 0, 1280, 720, SWP_NOZORDER | SWP_NOACTIVATE);
 	}
 
 	// --- 1920 * 1080 ---
-	if (GetAsyncKeyState(VK_F2))
+	if (GetAsyncKeyState(VK_F2) & 1)
 	{
 		SetWindowPos(window::getHwnd(), NULL, 0, 0, 1920, 1080, SWP_NOZORDER | SWP_NOACTIVATE);
 	}
 
 	// --- フルスクリーン ---
-	//if (GetAsyncKeyState(VK_MENU) & 1)
-	//{
-	//	window::stylize(!window::isFullScreen());
-	//}
+	if (GetAsyncKeyState(VK_F3) & 1)
+	{
+		window::stylize(!window::isFullScreen());
+	}
 
 
 #ifdef USE_IMGUI

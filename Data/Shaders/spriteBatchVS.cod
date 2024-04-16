@@ -53,7 +53,7 @@ dcl_temps 3
 //   o1.x <- <main return value>.color.x; o1.y <- <main return value>.color.y; o1.z <- <main return value>.color.z; o1.w <- <main return value>.color.w; 
 //   o0.x <- <main return value>.position.x; o0.y <- <main return value>.position.y; o0.z <- <main return value>.position.z; o0.w <- <main return value>.position.w
 //
-#line 7 "C:\Users\2230081\Desktop\-\HLSL\spriteBatchVS.hlsl"
+#line 7 "D:\2年次科目\チE"
 dp4 r0.x, v0.xyzw, v2.xyzw  // r0.x <- vout.position.x
 dp4 r0.y, v0.xyzw, v3.xyzw  // r0.y <- vout.position.y
 dp4 r0.z, v0.xyzw, v4.xyzw  // r0.z <- vout.position.z

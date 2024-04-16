@@ -69,7 +69,7 @@ dcl_temps 5
 //   o1.x <- <main return value>.color_.x; o1.y <- <main return value>.color_.y; o1.z <- <main return value>.color_.z; o1.w <- <main return value>.color_.w; 
 //   o0.x <- <main return value>.position_.x; o0.y <- <main return value>.position_.y; o0.z <- <main return value>.position_.z; o0.w <- <main return value>.position_.w
 //
-#line 14 "C:\Users\2230081\Desktop\-\HLSL\DebugRendererVS.hlsl"
+#line 14 "D:\2年次科目\チE"
 mul r0.xyzw, cb1[0].xyzw, cb0[0].xxxx
 mul r1.xyzw, cb1[1].xyzw, cb0[0].yyyy
 add r0.xyzw, r0.xyzw, r1.xyzw

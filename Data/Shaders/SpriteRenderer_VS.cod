@@ -62,7 +62,7 @@
 // TEXCOORD                 0   xy          2     NONE   float   xy  
 //
 vs_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_constantbuffer CB2[1], immediateIndexed
 dcl_constantbuffer CB0[5], immediateIndexed
 dcl_input v0.xy
@@ -71,29 +71,133 @@ dcl_output_siv o0.xyzw, position
 dcl_output o1.xyzw
 dcl_output o2.xy
 dcl_temps 3
-mul r0.xy, v0.yxyy, cb0[0].wzww
-mul r0.zw, cb0[0].wwwz, cb0[2].wwwz
-div r0.zw, r0.zzzw, cb0[0].wwwz
-mul r1.xy, r0.zwzz, cb0[2].yxyy
-mad r0.xy, r0.xyxx, cb0[2].wzww, -r1.xyxx
-mul r1.x, cb0[4].x, l(0.017453)
-sincos r1.x, r2.x, r1.x
-mul r1.xy, r0.xyxx, r1.xxxx
-mad r0.y, r0.y, r2.x, -r1.x
-mad r0.x, r0.x, r2.x, r1.y
-mad r0.x, r0.z, cb0[2].y, r0.x
-mad r0.y, r0.w, cb0[2].x, r0.y
-mad r0.zw, -cb0[2].zzzw, cb0[2].xxxy, cb0[0].xxxy
-add r0.xy, r0.wzww, r0.xyxx
-add r0.x, r0.x, r0.x
+//
+// Initial variable locations:
+//   v0.x <- vin.position_.x; v0.y <- vin.position_.y; v0.z <- vin.position_.z; 
+//   v1.x <- vin.texcoord_.x; v1.y <- vin.texcoord_.y; 
+//   o2.x <- <main return value>.texcoord_.x; o2.y <- <main return value>.texcoord_.y; 
+//   o1.x <- <main return value>.color_.x; o1.y <- <main return value>.color_.y; o1.z <- <main return value>.color_.z; o1.w <- <main return value>.color_.w; 
+//   o0.x <- <main return value>.position_.x; o0.y <- <main return value>.position_.y; o0.z <- <main return value>.position_.z; o0.w <- <main return value>.position_.w
+//
+#line 17 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SpriteRenderer_VS.hlsl"
+nop 
+
+#line 15 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Common.hlsli"
+mul r0.x, cb0[4].x, l(0.017453)  // r0.x <- theta
+
+#line 16
+mov r0.x, r0.x  // r0.x <- <toRadian return value>
+
+#line 17 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SpriteRenderer_VS.hlsl"
+mov r0.x, r0.x  // r0.x <- theta
+
+#line 18
+sincos null, r0.y, r0.x  // r0.y <- cosValue
+
+#line 19
+sincos r0.x, null, r0.x  // r0.x <- sinValue
+
+#line 21
+mul r0.z, cb0[0].z, cb0[2].z
+div r0.z, r0.z, cb0[0].z
+mul r0.z, r0.z, cb0[2].x  // r0.z <- mx
+
+#line 22
+mul r0.w, cb0[0].w, cb0[2].w
+div r0.w, r0.w, cb0[0].w
+mul r0.w, r0.w, cb0[2].y  // r0.w <- my
+
+#line 24
+mul r1.xy, v0.xyxx, cb0[0].zwzz
+mul r1.xy, r1.xyxx, cb0[2].zwzz  // r1.x <- position.x; r1.y <- position.y
+
+#line 26
+mov r1.z, -r0.z
+add r1.x, r1.z, r1.x
+
+#line 27
+mov r1.z, -r0.w
+add r1.y, r1.z, r1.y
+
+#line 29
+mov r1.x, r1.x  // r1.x <- rx
+
+#line 30
+mov r1.y, r1.y  // r1.y <- ry
+
+#line 31
+mul r1.z, r0.y, r1.x
+mul r1.w, r0.x, r1.y
+mov r1.w, -r1.w
+add r1.z, r1.w, r1.z  // r1.z <- position.x
+
+#line 32
+mul r0.x, r0.x, r1.x
+mul r0.y, r0.y, r1.y
+add r0.x, r0.y, r0.x  // r0.x <- position.y
+
+#line 34
+add r0.y, r0.z, r1.z  // r0.y <- position.x
+
+#line 35
+add r0.x, r0.w, r0.x
+
+#line 37
+mul r0.z, cb0[2].x, cb0[2].z
+mov r0.z, -r0.z
+add r0.z, r0.z, cb0[0].x
+add r0.y, r0.z, r0.y
+
+#line 38
+mul r0.z, cb0[2].y, cb0[2].w
+mov r0.z, -r0.z
+add r0.z, r0.z, cb0[0].y
+add r0.x, r0.z, r0.x
+
+#line 40
+nop 
+
+#line 4 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Common.hlsli"
+mul r0.y, r0.y, l(2.000000)
+div r0.y, r0.y, cb2[0].x
+mov r0.z, l(-1.000000)
+add r1.x, r0.z, r0.y  // r1.x <- x
+
+#line 5
+mul r0.x, r0.x, l(2.000000)
 div r0.x, r0.x, cb2[0].y
-add o0.y, -r0.x, l(1.000000)
-add r0.x, r0.y, r0.y
-div r0.x, r0.x, cb2[0].x
-add o0.x, r0.x, l(-1.000000)
-mov o0.zw, l(0,0,0,1.000000)
-mov o1.xyzw, cb0[1].xyzw
-mad r0.xy, v1.xyxx, cb0[0].zwzz, cb0[3].xyxx
-div o2.xy, r0.xyxx, cb0[3].zwzz
+mov r0.x, -r0.x
+add r1.y, r0.x, l(1.000000)  // r1.y <- y
+
+#line 6
+mov r1.z, l(0)  // r1.z <- z
+
+#line 8
+mov r1.x, r1.x  // r1.x <- <screenToNDC return value>.x
+mov r1.y, r1.y  // r1.y <- <screenToNDC return value>.y
+mov r1.z, r1.z  // r1.z <- <screenToNDC return value>.z
+
+#line 40 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SpriteRenderer_VS.hlsl"
+mov r1.xyz, r1.xyzx  // r1.x <- vout.position_.x; r1.y <- vout.position_.y; r1.z <- vout.position_.z
+mov r1.w, l(1.000000)  // r1.w <- vout.position_.w
+
+#line 41
+mov r0.xyzw, cb0[1].xyzw  // r0.x <- vout.color_.x; r0.y <- vout.color_.y; r0.z <- vout.color_.z; r0.w <- vout.color_.w
+
+#line 43
+mul r2.x, v1.x, cb0[0].z
+add r2.x, r2.x, cb0[3].x
+div r2.x, r2.x, cb0[3].z  // r2.x <- texcoord.x
+mul r2.z, v1.y, cb0[0].w
+add r2.z, r2.z, cb0[3].y
+div r2.y, r2.z, cb0[3].w  // r2.y <- texcoord.y
+
+#line 47
+mov r2.xy, r2.xyxx  // r2.x <- vout.texcoord_.x; r2.y <- vout.texcoord_.y
+
+#line 49
+mov o0.xyzw, r1.xyzw
+mov o1.xyzw, r0.xyzw
+mov o2.xy, r2.xyxx
 ret 
-// Approximately 25 instruction slots used
+// Approximately 64 instruction slots used

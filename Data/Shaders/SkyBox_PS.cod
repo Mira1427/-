@@ -44,20 +44,41 @@
 // SV_TARGET                0   xyzw        0   TARGET   float   xyzw
 //
 ps_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_constantbuffer CB0[8], immediateIndexed
 dcl_sampler s1, mode_default
 dcl_resource_texturecube (float,float,float,float) t0
 dcl_input_ps linear v1.xy
 dcl_output o0.xyzw
 dcl_temps 2
-mad r0.x, -v1.y, l(2.000000), l(1.000000)
-mul r0.xyzw, r0.xxxx, cb0[5].xyzw
-mad r1.x, v1.x, l(2.000000), l(-1.000000)
-mad r0.xyzw, r1.xxxx, cb0[4].xyzw, r0.xyzw
-add r0.xyzw, r0.xyzw, cb0[6].xyzw
-add r0.xyzw, r0.xyzw, cb0[7].xyzw
+//
+// Initial variable locations:
+//   v0.x <- pin.position_.x; v0.y <- pin.position_.y; v0.z <- pin.position_.z; v0.w <- pin.position_.w; 
+//   v1.x <- pin.texcoord_.x; v1.y <- pin.texcoord_.y; 
+//   o0.x <- <main return value>.x; o0.y <- <main return value>.y; o0.z <- <main return value>.z; o0.w <- <main return value>.w
+//
+#line 8 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\SkyBox_PS.hlsl"
+mul r0.x, v1.x, l(2.000000)
+mov r0.y, l(-1.000000)
+add r0.x, r0.y, r0.x
+mul r0.y, v1.y, l(2.000000)
+mov r0.y, -r0.y
+add r0.y, r0.y, l(1.000000)
+mul r1.xyzw, r0.xxxx, cb0[4].xyzw
+mul r0.xyzw, r0.yyyy, cb0[5].xyzw
+add r0.xyzw, r0.xyzw, r1.xyzw
+mul r1.xyzw, cb0[6].xyzw, l(1.000000, 1.000000, 1.000000, 1.000000)
+add r0.xyzw, r0.xyzw, r1.xyzw
+mul r1.xyzw, cb0[7].xyzw, l(1.000000, 1.000000, 1.000000, 1.000000)
+add r0.xyzw, r0.xyzw, r1.xyzw  // r0.x <- R.x; r0.y <- R.y; r0.z <- R.z; r0.w <- R.w
+
+#line 16
 div r0.xyz, r0.xyzx, r0.wwww
-sample_l_indexable(texturecube)(float,float,float,float) o0.xyzw, r0.xyzx, t0.xyzw, s1, l(0.000000)
+
+#line 18
+mov r0.w, l(0)  // r0.w <- lod
+
+#line 19
+sample_l_indexable(texturecube)(float,float,float,float) o0.xyzw, r0.xyzx, t0.xyzw, s1, r0.w
 ret 
-// Approximately 9 instruction slots used
+// Approximately 17 instruction slots used

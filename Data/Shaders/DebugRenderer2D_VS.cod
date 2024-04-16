@@ -57,27 +57,121 @@
 // COLOR                    0   xyzw        1     NONE   float   xyzw
 //
 vs_5_0
-dcl_globalFlags refactoringAllowed
+dcl_globalFlags refactoringAllowed | skipOptimization
 dcl_constantbuffer CB2[1], immediateIndexed
 dcl_constantbuffer CB0[3], immediateIndexed
 dcl_input v0.xy
 dcl_output_siv o0.xyzw, position
 dcl_output o1.xyzw
 dcl_temps 2
-mul r0.x, cb0[2].z, l(0.017453)
-sincos r0.x, r1.x, r0.x
-mad r0.yz, v0.yyxy, cb0[0].wwzw, -cb0[2].yyxy
-mul r0.xw, r0.xxxx, r0.yyyz
-mad r0.x, r0.z, r1.x, -r0.x
-mad r0.y, r0.y, r1.x, r0.w
-add r0.xy, r0.xyxx, cb0[2].xyxx
-add r0.zw, cb0[0].xxxy, -cb0[2].xxxy
-add r0.xy, r0.zwzz, r0.xyxx
-add r0.xy, r0.xyxx, r0.xyxx
-div r0.xy, r0.xyxx, cb2[0].xyxx
-add o0.y, -r0.y, l(1.000000)
-add o0.x, r0.x, l(-1.000000)
-mov o0.zw, l(0,0,0,1.000000)
-mov o1.xyzw, cb0[1].xyzw
+//
+// Initial variable locations:
+//   v0.x <- vin.position_.x; v0.y <- vin.position_.y; v0.z <- vin.position_.z; v0.w <- vin.position_.w; 
+//   o1.x <- <main return value>.color_.x; o1.y <- <main return value>.color_.y; o1.z <- <main return value>.color_.z; o1.w <- <main return value>.color_.w; 
+//   o0.x <- <main return value>.position_.x; o0.y <- <main return value>.position_.y; o0.z <- <main return value>.position_.z; o0.w <- <main return value>.position_.w
+//
+#line 16 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRenderer2D_VS.hlsl"
+nop 
+
+#line 15 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Common.hlsli"
+mul r0.x, cb0[2].z, l(0.017453)  // r0.x <- theta
+
+#line 16
+mov r0.x, r0.x  // r0.x <- <toRadian return value>
+
+#line 16 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRenderer2D_VS.hlsl"
+mov r0.x, r0.x  // r0.x <- theta
+
+#line 17
+sincos null, r0.y, r0.x  // r0.y <- cosValue
+
+#line 18
+sincos r0.x, null, r0.x  // r0.x <- sinValue
+
+#line 20
+div r0.z, cb0[0].z, cb0[0].z
+mul r0.z, r0.z, cb0[2].x  // r0.z <- mx
+
+#line 21
+div r0.w, cb0[0].w, cb0[0].w
+mul r0.w, r0.w, cb0[2].y  // r0.w <- my
+
+#line 23
+mul r1.xy, v0.xyxx, cb0[0].zwzz  // r1.x <- position.x; r1.y <- position.y
+
+#line 25
+mov r1.z, -r0.z
+add r1.x, r1.z, r1.x
+
+#line 26
+mov r1.z, -r0.w
+add r1.y, r1.z, r1.y
+
+#line 28
+mov r1.x, r1.x  // r1.x <- rx
+
+#line 29
+mov r1.y, r1.y  // r1.y <- ry
+
+#line 30
+mul r1.z, r0.y, r1.x
+mul r1.w, r0.x, r1.y
+mov r1.w, -r1.w
+add r1.z, r1.w, r1.z  // r1.z <- position.x
+
+#line 31
+mul r0.x, r0.x, r1.x
+mul r0.y, r0.y, r1.y
+add r0.x, r0.y, r0.x  // r0.x <- position.y
+
+#line 33
+add r0.y, r0.z, r1.z  // r0.y <- position.x
+
+#line 34
+add r0.x, r0.w, r0.x
+
+#line 36
+mov r0.z, -cb0[2].x
+add r0.z, r0.z, cb0[0].x
+add r0.y, r0.z, r0.y
+
+#line 37
+mov r0.z, -cb0[2].y
+add r0.z, r0.z, cb0[0].y
+add r0.x, r0.z, r0.x
+
+#line 39
+nop 
+
+#line 4 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\Common.hlsli"
+mul r0.y, r0.y, l(2.000000)
+div r0.y, r0.y, cb2[0].x
+mov r0.z, l(-1.000000)
+add r1.x, r0.z, r0.y  // r1.x <- x
+
+#line 5
+mul r0.x, r0.x, l(2.000000)
+div r0.x, r0.x, cb2[0].y
+mov r0.x, -r0.x
+add r1.y, r0.x, l(1.000000)  // r1.y <- y
+
+#line 6
+mov r1.z, l(0)  // r1.z <- z
+
+#line 8
+mov r1.x, r1.x  // r1.x <- <screenToNDC return value>.x
+mov r1.y, r1.y  // r1.y <- <screenToNDC return value>.y
+mov r1.z, r1.z  // r1.z <- <screenToNDC return value>.z
+
+#line 39 "C:\Users\2230064\source\repos\Mira1427\-\HLSL\DebugRenderer2D_VS.hlsl"
+mov r1.xyz, r1.xyzx  // r1.x <- vout.position_.x; r1.y <- vout.position_.y; r1.z <- vout.position_.z
+mov r1.w, l(1.000000)  // r1.w <- vout.position_.w
+
+#line 40
+mov r0.xyzw, cb0[1].xyzw  // r0.x <- vout.color_.x; r0.y <- vout.color_.y; r0.z <- vout.color_.z; r0.w <- vout.color_.w
+
+#line 42
+mov o0.xyzw, r1.xyzw
+mov o1.xyzw, r0.xyzw
 ret 
-// Approximately 16 instruction slots used
+// Approximately 51 instruction slots used
